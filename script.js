@@ -9,7 +9,7 @@ var btn4 = document.querySelector("#btn4")
 var scoreSection = document.querySelector(".scoreSection")
 var scoreList = document.querySelector("#score")
 var restartBtn = document.querySelector(".restart")
-
+var timeEl = document.querySelector("#timer")
 var questions = [
     {
 question:"What does HTML stand for?",
@@ -20,21 +20,21 @@ Option4:"Hotmail"
     },
     {
 question:"What does CSS stand for?",
-Option1:"Hitmonlee",
-Option2:"Cascading Style Sheets",
-Option3:"Hot Meal",
-Option4:"Hotmail"
+Option1:"Color Style sheets",
+Option2:"Control Shift",
+Option3:"Cascading Style Sheets",
+Option4:"CS:GO"
     },
     {
 question:"What does JS stand for?",
-Option1:"Hitmonlee",
-Option2:"JavaScript",
-Option3:"Hot Meal",
-Option4:"Hotmail"
+Option1:"JavaStreet",
+Option2:"JavaBean",
+Option3:"JavaSip",
+Option4:"JavaScript"
     },
 ]
 var index = 0
-var seconds = 60
+var secondsLeft = 60
 startBtn.addEventListener("click", function(){
     startSection.style="display:none"
     quizSection.style="display:block"
@@ -47,7 +47,26 @@ startBtn.addEventListener("click", function(){
     btn2.addEventListener("click",nextQuestion)
     btn3.addEventListener("click",nextQuestion)
     btn4.addEventListener("click",nextQuestion)
+    setTime()
 })
+
+function setTime() {
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timeEl.textContent = secondsLeft + " seconds left.";
+  
+      if(secondsLeft === 0) {
+        clearInterval(timerInterval);
+        quizSection.style="display:none"
+        scoreSection.style="display:block"
+        var initals= prompt("enter your initals")
+        var li = document.createElement("li")
+        li.textContent=initals+": "+0
+        scoreList.appendChild(li)
+      }
+  
+    }, 1000);
+  }
 
 function nextQuestion(){
     index++ 
